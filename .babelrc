@@ -1,0 +1,21 @@
+{
+	"plugins": [
+		["dual-import"],
+		["syntax-dynamic-import"],
+		["syntax-async-functions"],
+		["transform-decorators-legacy"],
+		["transform-object-assign"],
+		["transform-class-properties"],
+		["transform-export-extensions"],
+		["transform-object-rest-spread"],
+		["transform-react-jsx", { "pragma": "h" }]
+	],
+	"presets": [
+		["env", {
+			"uglify": true,
+			"exclude": [
+				"transform-es2015-typeof-symbol"
+			]
+		}]
+	]
+}
