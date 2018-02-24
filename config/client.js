@@ -6,8 +6,9 @@ module.exports = NODE_ENV => {
 
 	return {
 		analyzer: {
-			generateStatsFile: DEV
+			generateStatsFile: false
 		},
+		port: 3000,
 		build_dir: path.resolve(__dirname, '../build/client'),
 		devtool: DEV ? 'source-map' : false,
 		jarvis: DEV ? {

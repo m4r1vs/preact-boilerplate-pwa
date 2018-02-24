@@ -1,0 +1,22 @@
+.this {
+
+	--height: 56px;
+	--padding: 16px;
+
+	position: fixed;
+	background-color: var(--primary-color);
+	top: 0;
+	left: 0;
+	right: 0;
+	height: var(--height);
+	box-shadow: var(--box-shadow-lvl-2);
+	padding: var(--padding);
+
+	h2 {
+		font-size: 20px;
+		color: var(--text-color-light-primary);
+		margin: 0 0 0 30px;
+		padding: 0 0 0 var(--padding);
+		line-height: calc(var(--height) - (var(--padding) * 2));
+	}
+}

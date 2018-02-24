@@ -1,0 +1,55 @@
+
+body, html {
+	transition: background-color .13s;
+	background-color: var(--background-color);
+	font-family: var(--font-stack) !important;
+}
+
+body {
+	padding-top: 56px;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+:global {
+
+	*[transition=fadeIn] {
+		opacity: 0;
+		animation-timing-function: ease-in;
+		animation-fill-mode: forwards;
+		animation-duration: .22s;
+		animation-delay: 0;
+
+		:local {
+			animation-name: fadeIn;
+		}
+	}
+
+	a {
+		text-decoration: none;
+		color: inherit;
+		cursor: pointer;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	i.material-icons {
+		position: relative;
+		top: 5px;
+	}
+}
+
+@keyframes fadeIn {
+
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}

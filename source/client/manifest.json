@@ -1,0 +1,9 @@
+{
+	"name": "Preact Boilerplate",
+	"short_name": "PWA",
+	"start_url": "/",
+	"display": "standalone",
+	"orientation": "portrait",
+	"background_color": "#FAFAFA",
+	"theme_color": "#175854"
+}

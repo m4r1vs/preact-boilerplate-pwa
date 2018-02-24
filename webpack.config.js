@@ -21,26 +21,6 @@ module.exports = (ATTRIBUTES = {}) => {
 
 	logger.info(`Starting build of ${packageJSON.name || 'UNKNOWN'} in ${env.NODE_ENV} mode with log-level at ${env.CONFIG.logLevel}.`)
 
-	// // run yarn watch:server in the background when started with --env.startServer=true
-	// if (ATTR.startServer) {
-	// 	const { spawn } = require('child_process')
-	// 	const ls = spawn('yarn', ['watch:server'])
-
-	// 	logger.log('Spawned child-process babel-watch...')
-
-	// 	ls.stdout.on('data', (data) => {
-	// 		console.log('[BABEL-WATCH] '.magenta + `Log: ${data}`.cyan)
-	// 	})
-
-	// 	ls.stderr.on('data', (data) => {
-	// 		console.error('[BABEL-WATCH] '.magenta + `Error: ${data}`.red)
-	// 	})
-
-	// 	ls.on('close', (code) => {
-	// 		logger.log(`Babel-watch exited with code: ${code}`)
-	// 	})
-	// }
-
 	return {
 
 		devtool: env.CONFIG.devtool,
@@ -64,7 +44,7 @@ module.exports = (ATTRIBUTES = {}) => {
 		},
 
 		// get plugins from webpack.plugins.js
-		// plugins: require('./webpack.plugins.js')(BUILD_CONFIG, CONFIG_CLIENT, CONFIG_SERVER, CONFIG_CSS_VARS, BUILD_DIR, ATTR, logger),
+		plugins: require('./webpack.plugins.js')(env, logger),
 
 		module: {
 			rules: [
@@ -78,38 +58,38 @@ module.exports = (ATTRIBUTES = {}) => {
 					}
 				},
 
-				// {
-				// 	// use ExtractTextPlugin to save postcss-processed CSS into one big file
-				// 	test: /\.scss$/,
-				// 	use: ExtractCssPlugin.extract({
-				// 		use: [
-				// 			{
-				// 				loader: 'css-loader',
-				// 				options: {
-				// 					importLoaders: 1,
-				// 					modules: true,
-				// 					localIdentName: CONFIG_CLIENT.DEBUG ? '[name]_[local]_[hash:base64:5]' : '[hash:base64:8]' // name of CSS classes, add component-name when in DEBUG
-				// 				}
-				// 			},
-				// 			{
-				// 				loader: 'postcss-loader',
-				// 				options: {
-				// 					plugins: () => [
-				// 						require('postcss-nested')(), // allows SCSS-like syntax
-				// 						require('postcss-cssnext')({
-				// 							warnForDuplicates: false,
-				// 							features: {
-				// 								customProperties: {
-				// 									variables: CONFIG_CSS_VARS
-				// 								}
-				// 							}
-				// 						})
-				// 					]
-				// 				}
-				// 			}
-				// 		]
-				// 	})
-				// }
+				{
+					// use ExtractTextPlugin to save postcss-processed CSS into one big file
+					test: /\.scss$/,
+					use: ExtractCssPlugin.extract({
+						use: [
+							{
+								loader: 'css-loader',
+								options: {
+									importLoaders: 1,
+									modules: true,
+									localIdentName: env.NODE_ENV === 'development' ? '[name]_[local]_[hash:base64:5]' : '[hash:base64:8]' // name of CSS classes, add component-name when in DEBUG
+								}
+							},
+							{
+								loader: 'postcss-loader',
+								options: {
+									plugins: () => [
+										require('postcss-nested')(), // allows SCSS-like syntax
+										require('postcss-cssnext')({
+											warnForDuplicates: false,
+											features: {
+												customProperties: {
+													variables: env.CSS_VARIABLES
+												}
+											}
+										})
+									]
+								}
+							}
+						]
+					})
+				}
 
 			]
 		},

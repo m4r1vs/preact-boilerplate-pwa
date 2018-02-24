@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+
+		<!-- See config/webpack.config.js for injected variables -->
+		<title><%= htmlWebpackPlugin.options.customVars.title %></title>
+		<meta name="theme-color" content="<%= htmlWebpackPlugin.options.customVars.themeColor %>">
+		<link rel="icon" type="image/x-icon" href="<%= htmlWebpackPlugin.options.customVars.favicon %>"/>
+		<link rel="shortcut icon" type="image/x-icon" href="<%= htmlWebpackPlugin.options.customVars.favicon %>"/>
+
+		<link rel="manifest" href="/manifest.json">
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	</head>
+
+	<body>
+		<!-- App gets mounted here -->
+	</body>
+
+	<!-- WebPack automatically adds the javascript here -->
+
+	<script>
+  	WebFontConfig={google:{families:<%= htmlWebpackPlugin.options.customVars.fonts %>}};(function(a){var b=a.createElement("script");a=a.scripts[0];b.src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js";b.async=!0;a.parentNode.insertBefore(b,a)})(document);
+	</script>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" media="none" onload="this.media = 'all'">
+
+</html>
