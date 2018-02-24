@@ -142,7 +142,8 @@ module.exports = (env, logger) => {
 		new BrowserSyncPlugin({
 			host: 'localhost',
 			port: env.CONFIG.port,
-			server: { baseDir: [env.BUILD_DIR] }
+			proxy: env.startServer ? `http://localhost:4000` : false,
+			server: env.startServer ? false : { baseDir: [env.BUILD_DIR] }
 		}),
 
 
