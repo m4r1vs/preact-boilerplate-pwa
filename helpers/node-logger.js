@@ -21,7 +21,7 @@ module.exports = prefix => {
 		},
 
 		error: (log) => {
-			if (typeof log === 'string') console.errorlog(prefix + log.red)
+			if (typeof log === 'string') console.error(prefix + log.red)
 			else console.error('Error:\n'.red, log)
 		}
 	}

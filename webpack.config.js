@@ -15,11 +15,32 @@ module.exports = (ATTRIBUTES = {}) => {
 	let env = ATTRIBUTES
 	env.BUILD_DIR = path.resolve(__dirname, './build/client')
 	env.NODE_ENV = process.env.NODE_ENV
-	env.CSS_VARIABLES = require('./css.variables')
+	env.CSS_VARIABLES = require('./config/css.variables')
 	env.APP_VERSION = packageJSON.version
 	env.CONFIG = require('./config/client')(env.NODE_ENV)
 
 	logger.info(`Starting build of ${packageJSON.name || 'UNKNOWN'} in ${env.NODE_ENV} mode with log-level at ${env.CONFIG.logLevel}.`)
+
+	// run yarn watch:server in the background when started with --env.startServer=true
+	if (ATTRIBUTES.startServer) {
+
+		const { spawn } = require('child_process')
+		const ls = spawn('yarn', ['firebase:serve:only:hosting'])
+
+		logger.info('Spawned child-process firebase serve...')
+
+		ls.stdout.on('data', (data) => {
+			logger.info('[FIREBASE] '.yellow + `Log: ${data}`.cyan)
+		})
+
+		ls.stderr.on('data', (data) => {
+			logger.error('[FIREBASE] '.yellow + `Error: ${data}`.red)
+		})
+
+		ls.on('close', (code) => {
+			logger.info(`Firebase serve exited with code: ${code}`)
+		})
+	}
 
 	return {
 
