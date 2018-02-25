@@ -26,7 +26,8 @@
   },
   "globals": {
     "DEBUG": true,
-    "serviceWorkerOption": true
+    "serviceWorkerOption": true,
+    "firebase": true
   },
   "rules": {
 
