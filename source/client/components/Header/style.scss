@@ -3,6 +3,7 @@
 	--height: 56px;
 	--padding: 16px;
 
+	z-index: 1;
 	position: fixed;
 	background-color: var(--primary-color);
 	top: 0;
@@ -11,13 +12,114 @@
 	height: var(--height);
 	box-shadow: var(--box-shadow-lvl-1);
 	padding: var(--padding);
+	transition: height .22s, transform .22s, background-color .22s;
+
+	@media (max-width: 1024px) {
+		&[appearance=expanded] {
+
+			height: 132px;
+
+			h2 {
+				margin-left: 0;
+				padding-left: 0;
+				bottom: 16px;
+				font-size: 28px;
+				line-height: unset;
+			}
+		}
+	}
+
+	&[appearance=hidden] {
+		transform: translateY(-56px);
+	}
+
+	i.logo {
+		position: absolute;
+		margin-left: 4px;
+
+		@media (max-width: 1024px) {
+			display: none;
+		}
+	}
+
+	.navbtn {
+		user-select: none;
+		width: 22px;
+		height: 18px;
+		position: absolute;
+		margin: 3px auto;
+		cursor: pointer;
+		transition: all 0.2s ease-in-out;
+		appearance: none;
+		background: none;
+		border: none;
+
+		&:hover, &:active {
+			outline: none;
+		}
+
+		@media (min-width: 1025px) {
+			opacity: 0;
+			cursor: unset;
+			margin-left: 8px !important;
+		}
+
+		span {
+			display: block;
+			position: absolute;
+			height: 2px;
+			width: 100%;
+			background: #fff;
+			left: 0;
+			transition: 0.2s ease-in-out;
+
+			&:nth-child(1) {
+				top: 2px;
+			}
+
+			&:nth-child(2) {
+				top: 8px;
+			}
+
+			&:nth-child(3) {
+				top: 14px;
+			}
+		}
+
+		&[appearance=arrow] {
+			transform: rotate(180deg) !important;
+
+			@media (min-width: 1025px) {
+				opacity: 1 !important;
+			}
+			
+			span {
+
+				&:nth-child(1) {
+					transform: rotate(45deg);
+					width: 50%;
+					left: 12px;
+					top: 4px;
+				}
+
+				&:nth-child(3) {
+					transform: rotate(-45deg);
+					width: 50%;
+					left: 12px;
+					top: 12px;
+				}
+			}
+		}
+	}
 
 	h2 {
+		position: absolute;
 		font-size: 20px;
 		color: var(--text-color-light-primary);
 		margin: 0 0 0 30px;
 		padding: 0 0 0 var(--padding);
 		line-height: calc(var(--height) - (var(--padding) * 2));
+		transition: all .22s;
 		
 		@media (min-width: 1025px) {
 			margin: 0 0 0 44px;

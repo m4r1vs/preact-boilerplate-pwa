@@ -15,7 +15,6 @@ module.exports = (ATTRIBUTES = {}) => {
 	let env = ATTRIBUTES
 	env.BUILD_DIR = path.resolve(__dirname, './build/client')
 	env.NODE_ENV = process.env.NODE_ENV
-	env.CSS_VARIABLES = require('./config/css.variables')
 	env.APP_VERSION = packageJSON.version
 	env.CONFIG = require('./config/client')(env.NODE_ENV)
 
@@ -101,10 +100,13 @@ module.exports = (ATTRIBUTES = {}) => {
 											warnForDuplicates: false,
 											features: {
 												customProperties: {
-													variables: env.CSS_VARIABLES
+													preserve: true,
+													warnings: false,
+													appendVariables: false
 												}
 											}
-										})
+										}),
+										require('cssnano')
 									]
 								}
 							}

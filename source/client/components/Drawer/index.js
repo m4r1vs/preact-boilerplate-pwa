@@ -11,6 +11,8 @@ export default class NavigationDrawer extends Component {
 		const panel = document.getElementById('main_component')
 		const { drawer, greyback } = this
 
+		window.navigationDrawer = {}
+
 		let drawerwidth = drawer.offsetWidth
 		let startx = 0
 		let distgrey = 0
@@ -51,8 +53,8 @@ export default class NavigationDrawer extends Component {
 			greyback.style.display = 'block'
 		}
 
-		window.closeDrawer = bool => {
-			if (!bool) {
+		window.navigationDrawer.close = immidiate => {
+			if (!immidiate) {
 				drawerTransition(true, 'out')
 			}
 			else {
@@ -62,17 +64,23 @@ export default class NavigationDrawer extends Component {
 			drawerClosing()
 		}
 
-		window.addEventListener('resize', e => {
-			window.closeDrawer(true)
+		window.navigationDrawer.open = () => {
+			drawer.style.transition = 'transform .16s cubic-bezier(0.0, 0.0, 0.2, 1)'
+			greyback.style.transition = 'opacity .16s linear'
+			drawerwidth = drawer.offsetWidth
+			drawerOpening()
+		}
+
+		window.addEventListener('resize', () => {
+			window.navigationDrawer.close(true)
 		})
 
 		panel.addEventListener('touchstart', e => {
 			let touchobj = e.changedTouches[0]
 
-			drawerTransition(false, false)
-
 			startx = parseInt(touchobj.clientX, 10)
-			if (startx < 25) {
+			if (startx < 25 && !window.navigationDrawer.disabled) {
+				drawerTransition(false, false)
 				drawer.style.opacity = '1'
 				greyback.style.opacity = '0'
 				greyback.style.display = 'block'
@@ -102,9 +110,9 @@ export default class NavigationDrawer extends Component {
 		})
 
 		panel.addEventListener('touchend', e => {
-			drawerTransition(true, 'in')
 			let touchobj = e.changedTouches[0] // Der erste Finger der den Bildschirm berührt wird gezählt
 			if (open) {
+				drawerTransition(true, 'in')
 				if (touchobj.clientX > 95) {
 					greyback.style.opacity = '1'
 					drawer.style.transform = `translateX(0px)`
@@ -161,7 +169,7 @@ export default class NavigationDrawer extends Component {
 		})
 	}
 
-	closeDrawer = () => window.closeDrawer()
+	closeDrawer = () => window.navigationDrawer.close()
 
 	toggleMore = () => this.setState(prev => (
 		{ moreOpened: !prev.moreOpened}

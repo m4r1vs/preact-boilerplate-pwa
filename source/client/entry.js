@@ -17,8 +17,7 @@ else console.log(`%cWelcome to the development build of ATTACH web platform vers
  * Mount the application to document.body.
  */
 const mountApp = () => initializeState() && render(
-	<Provider
-		uiStore={Stores.uiStore}>
+	<Provider {...Stores}>
 		<App />
 	</Provider>,
 	document.body
@@ -29,8 +28,8 @@ const mountApp = () => initializeState() && render(
  */
 if (process.env.NODE_ENV === 'production') {
 	polyfill({
-		fills: process.env.config.polyfills,
+		fills: process.env.CONFIG.polyfills,
 		rum: false,
-		afterFill: () => requestAnimationFrame(mountApp)
+		afterFill: () => mountApp()
 	})
-} else requestAnimationFrame(mountApp)
+} else mountApp()

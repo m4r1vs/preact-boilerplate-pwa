@@ -10,9 +10,7 @@ export default class Home extends Component {
 
 	render = ({ uiStore }) => (
 		<div class={style.this}>
-			<h1>{uiStore.title}</h1>
-			<button onClick={uiStore.inc}>{uiStore.counter}</button>
-			<button onClick={this.chngTitle}>Change title</button>
+			<h1>Hello World</h1>
 		</div>
 	)
 
