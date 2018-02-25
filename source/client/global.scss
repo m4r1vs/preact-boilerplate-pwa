@@ -26,6 +26,10 @@ body {
 			animation-name: fadeIn;
 		}
 	}
+	
+	#main_component {
+		height: calc(100vh - 56px);
+	}
 
 	a {
 		text-decoration: none;

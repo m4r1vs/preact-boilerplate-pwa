@@ -1,0 +1,179 @@
+.this {
+	z-index: 5;
+
+	nav {
+		background: #fff;
+		width: calc(100vw - 56px);
+		position: fixed;
+		transform: translateX(-360px);
+		box-shadow: 0 0 16px rgba(0, 0, 0, .7);
+		max-width: 320px;
+		top: 0;
+		bottom: 0;
+		overflow-x: hidden;
+		overflow-y: auto;
+		transition: none;
+		z-index: 1;
+
+		@media (min-width: 1025px) {
+			width: 210px !important;
+			display: block !important;
+			opacity: 1 !important;
+			transform: translateX(8px) !important;
+			top: 64px !important;
+			right: unset;
+			background: transparent !important;
+			box-shadow: none !important;
+			transition: none !important;
+		}
+
+		.header {
+			border-bottom: 1px solid #000;
+			height: 146px;
+			width: 100%;
+			background-size: cover;
+			background-position: center;
+			overflow: hidden;
+			margin-bottom: 8px;
+
+			@media (min-width: 1025px) {
+				display: none !important;
+			}
+
+			div {
+			 	background-color: rgba(0, 0, 0, .22);
+			 	height: 100%;
+				width: 100%;
+				user-select: none;
+
+				.profilePicture {
+					border-radius: 50%;
+					position: relative;
+					height: 64px;
+					width: 64px;
+					background-size: cover;
+					left: 16px;
+					top: 16px;
+				}
+
+				span.username {
+					font-size: 14px;
+					color: rgba(255, 255, 255, 1);
+					position: absolute;
+					top: calc(138px - 32px);
+					left: 16px;
+				}
+
+				span.email {
+					font-size: 14px;
+					color: rgba(255, 255, 255, .74);
+					position: absolute;
+					top: calc(138px - 16px);
+					left: 16px;
+				}
+
+				i {
+					color: #fff;
+					position: absolute;
+					top: calc(138px - 28px);
+					right: 16px;
+					transition: .2s ease-in-out;
+					cursor: pointer;
+					user-select: none;
+
+					&:active, &:hover {
+						outline: none;
+					}
+				}
+
+				i.moreOpened {
+					transform: rotate(180deg);
+				}
+
+			}
+		}
+
+		.links {
+
+			height: calc(100% - 155px);
+			width: 100%;
+
+			div {
+				@media (min-width: 1025px) {
+					display: block !important;
+				}
+
+				a {
+					text-decoration: none;
+					color: inherit;
+		
+					span {
+						font-size: 16px;
+						color: var(--text-color-dark-primary);
+						padding: 8px 0 14px 14px;
+						font-weight: 500;
+						user-select: none;
+						display: block;
+			
+						&:hover {
+							background: #F5F5F5;
+							color: var(--primary-color);
+							cursor: pointer;
+
+							@media (min-width: 1025px) {
+								background: rgba(0, 0, 0, .04) !important;
+							}
+
+						}
+					}
+
+					&[class=active] span {
+						color: var(--primary-color);
+						background: #F5F5F5;
+
+						@media (min-width: 1025px) {
+							background: none;
+						}
+						
+						i {
+							color: var(--primary-color);
+						}
+					}
+				}
+			}
+
+			hr {
+				display: none;
+			
+				@media (min-width: 1025px) {
+					display: block !important;
+					border: none !important;
+					border-top: 1px solid rgba(0, 0, 0, 0.12) !important;
+					margin: 7px 0 !important;
+				}
+			}
+		}
+	}
+
+	.greyBack {
+		background: rgba(0, 0, 0, 0.52);
+		display: none;
+		position: fixed;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		
+		&:focus {
+			background: rgba(92, 72, 0, 0.52);
+		}
+		
+		&:hover, &:active {
+			background: rgba(0, 0, 0, 0.52);
+		}
+
+		@media (min-width: 1025px) {
+			display: none !important;
+		}
+	}
+}

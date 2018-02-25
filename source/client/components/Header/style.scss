@@ -18,5 +18,9 @@
 		margin: 0 0 0 30px;
 		padding: 0 0 0 var(--padding);
 		line-height: calc(var(--height) - (var(--padding) * 2));
+		
+		@media (min-width: 1025px) {
+			margin: 0 0 0 44px;
+		}
 	}
 }

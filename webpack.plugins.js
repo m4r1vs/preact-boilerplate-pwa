@@ -56,8 +56,8 @@ module.exports = (env, logger) => {
 			customVars: { // custom variables that will be injected into the HTML template
 				title: require('./source/client/manifest.json').name || 'Error getting title from manifest.json',
 				themeColor: require('./source/client/manifest.json').theme_color || '#fff',
-				fonts: JSON.stringify(['Roboto:300,300i', 'Material+Icons'])
-				// TODO: favicon: require('./source/client/manifest.json').favicon
+				fonts: JSON.stringify(['Roboto:300,300i', 'Material+Icons']),
+				favicon: require('./source/client/manifest.json').favicon
 			}
 		}),
 
