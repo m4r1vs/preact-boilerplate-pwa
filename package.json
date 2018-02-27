@@ -9,19 +9,14 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-
     "watch:client": "NODE_ENV='development' webpack --display-error-details --watch",
     "serve": "NODE_ENV='development' yarn watch:client --env.startServer=true",
-
     "build:client": "NODE_ENV='production' webpack --display-error-details",
-
     "firebase:serve:only:hosting": "firebase serve -p 4000 --only hosting",
-
     "lint": "eslint source",
     "lint:fix": "eslint source --fix",
     "stylelint": "stylelint source/client/**/*.scss",
     "stylelint:fix": "stylelint --fix source/client/**/*.scss",
-    
     "commit": "git-cz",
     "c": "yarn commit",
     "ac": "git add . && yarn commit",
@@ -44,6 +39,7 @@
     "babel-plugin-dual-import": "^1.2.1",
     "colors": "^1.1.2",
     "dynamic-polyfill": "^1.0.1",
+    "ganalytics": "^3.0.0",
     "mobx": "^3.5.1",
     "mobx-preact": "^1.1.0",
     "preact": "^8.2.7",

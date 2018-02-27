@@ -1,12 +1,23 @@
 import { h, Component } from 'preact'
+import GAnalytics from 'ganalytics'
 import Router from 'preact-router'
 import ViewWrapper from './wrapper'
 import AsyncRoute from '../utils/async-preact-route'
 
 export default class Routes extends Component {
 
+	triggerPageViewGA = () => {
+		const ga = new GAnalytics('UA-103885223-3', { aid: 1 })
+		ga.send('pageview')
+	}
+
+	handleRouteChange = e => {
+		console.log('Route changed: ', e)
+		if (process.env.NODE_ENV === 'production') this.triggerPageViewGA()
+	}
+
 	render = () => (
-		<Router>
+		<Router onChange={this.handleRouteChange}>
 			
 			<ViewWrapper
 				path="/"
